@@ -1,12 +1,12 @@
 <?php namespace barisbora\Fanout;
 
+use \Fanout\Fanout as FanoutProvider;
 
 class FanoutFactory
 {
 
     protected $config;
-
-    protected $simplepie;
+    protected $fanout = null;
 
     /**
      * @param $config
@@ -14,15 +14,23 @@ class FanoutFactory
     public function __construct ( $config )
     {
         $this->config = $config;
+
+        //$this->fanout = new Fanout('{realm-id}', '{realm-key}', $ssl = true);
+
     }
 
-    public function make ()
+    public function start ()
     {
-        echo 'make';
+        $this->fanout = new FanoutProvider( $this->config[ 'realm-id' ], $this->config[ 'realm-key' ], $ssl = true );
+
+        return $this;
     }
 
-    protected function configure ()
+    public function trigger ( $channel, $data = null )
     {
-        echo 'configure';
+
+        $this->fanout->publish( $channel, 'Test publish!' );
+
     }
+
 }
