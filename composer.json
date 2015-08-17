@@ -1,0 +1,20 @@
+{
+    "name": "barisbora/fanout",
+    "description": "A simple Laravel 5 fanout.io service provider",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Barış Bora",
+            "email": "baris.bora@itu.edu.tr"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "~5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "barisbora\\Fanout\\": "src/"
+        }
+    }
+}
