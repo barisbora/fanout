@@ -29,7 +29,7 @@ class FanoutFactory
     public function trigger ( $channel, $data = null )
     {
 
-        $this->fanout->publish( $channel, 'Test publish!' );
+        $this->fanout->publish( $channel, $data );
 
     }
 
