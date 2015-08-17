@@ -51,6 +51,8 @@ $fanout->trigger( 'want-to-brodcast-channel-name', [
 ] );
 ```
 
+DONT FORGET change YOUR-REALM-ID and YOUR-CHANNEL
+
 View:
 ```php
 @extends('layouts.default')
