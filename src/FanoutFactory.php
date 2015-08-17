@@ -13,19 +13,25 @@ class FanoutFactory
      */
     public function __construct ( $config )
     {
-        $this->config = $config;
 
-        //$this->fanout = new Fanout('{realm-id}', '{realm-key}', $ssl = true);
+        $this->config = $config;
 
     }
 
+    /**
+     * @return $this
+     */
     public function start ()
     {
-        $this->fanout = new FanoutProvider( $this->config[ 'realm-id' ], $this->config[ 'realm-key' ], $ssl = true );
+        $this->fanout = new FanoutProvider( $this->config[ 'realm-id' ], $this->config[ 'realm-key' ], $this->config[ 'ssl' ] );
 
         return $this;
     }
 
+    /**
+     * @param $channel
+     * @param null
+     */
     public function trigger ( $channel, $data = null )
     {
 
