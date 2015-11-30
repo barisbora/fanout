@@ -2,8 +2,6 @@
 
 [![Latest Stable Version](https://poser.pugx.org/barisbora/fanout/v/stable.svg)](https://packagist.org/packages/barisbora/fanout) [![License](https://poser.pugx.org/barisbora/fanout/license.svg)](https://packagist.org/packages/barisbora/fanout)
 
-[![Total Downloads](https://poser.pugx.org/barisbora/fanout/downloads.svg)](https://packagist.org/packages/barisbora/fanout) [![Monthly Downloads](https://poser.pugx.org/barisbora/fanout/d/monthly.png)](https://packagist.org/packages/barisbora/fanout) [![Daily Downloads](https://poser.pugx.org/barisbora/fanout/d/daily.png)](https://packagist.org/packages/barisbora/fanout)
-
 
 A simple [Laravel 5](http://www.laravel.com/) service provider for [Fanout](http://www.fanout.io).
 
