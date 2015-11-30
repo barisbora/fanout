@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Fanout by barisbora</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Fanout</h1>
+      <h2 class="project-tagline">A simple Fanout.io bridge for Laravel 5</h2>
+      <a href="https://github.com/barisbora/fanout" class="btn">View on GitHub</a>
+      <a href="https://github.com/barisbora/fanout/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/barisbora/fanout/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="laravel-5-fanoutio-web-socket-service" class="anchor" href="#laravel-5-fanoutio-web-socket-service" aria-hidden="true"><span class="octicon octicon-link"></span></a>Laravel 5 Fanout.io Web Socket Service</h1>
+
+<p><a href="https://packagist.org/packages/barisbora/fanout"><img src="https://poser.pugx.org/barisbora/fanout/v/stable.svg" alt="Latest Stable Version"></a> <a href="https://packagist.org/packages/barisbora/fanout"><img src="https://poser.pugx.org/barisbora/fanout/license.svg" alt="License"></a></p>
+
+<p><a href="https://packagist.org/packages/barisbora/fanout"><img src="https://poser.pugx.org/barisbora/fanout/downloads.svg" alt="Total Downloads"></a> <a href="https://packagist.org/packages/barisbora/fanout"><img src="https://poser.pugx.org/barisbora/fanout/d/monthly.png" alt="Monthly Downloads"></a> <a href="https://packagist.org/packages/barisbora/fanout"><img src="https://poser.pugx.org/barisbora/fanout/d/daily.png" alt="Daily Downloads"></a></p>
+
+<p>A simple <a href="http://www.laravel.com/">Laravel 5</a> service provider for <a href="http://www.fanout.io">Fanout</a>.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>The Laravel 5 Fanout Service Provider can be installed via <a href="http://getcomposer.org">Composer</a> by requiring the
+<code>barisbora/fanout</code> package in your project's <code>composer.json</code>.</p>
+
+<pre><code>composer require barisbora/fanout
+</code></pre>
+
+<h2>
+<a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Configuration</h2>
+
+<p>To use the Fanout Service Provider, you must register the provider when bootstrapping your Laravel application.</p>
+
+<p>Find the <code>providers</code> key in your <code>config/app.php</code> and register the Service Provider.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>providers<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-c">// ...</span></span>
+<span class="pl-s1">        <span class="pl-c1">barisbora\Fanout\</span><span class="pl-c1">FanoutServiceProvider</span><span class="pl-k">::</span><span class="pl-c1">class</span>,</span>
+<span class="pl-s1">    ],</span></pre></div>
+
+<p>Find the <code>aliases</code> key in your <code>config/app.php</code> and register the Facade.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>aliases<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> [</span>
+<span class="pl-s1">        <span class="pl-c">// ...</span></span>
+<span class="pl-s1">        <span class="pl-s"><span class="pl-pds">'</span>Fanout<span class="pl-pds">'</span></span>    <span class="pl-k">=&gt;</span> <span class="pl-c1">barisbora\Fanout\Facades\</span><span class="pl-c1">FanoutFacade</span><span class="pl-k">::</span><span class="pl-c1">class</span>,</span>
+<span class="pl-s1">    ],</span></pre></div>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Run <code>php artisan vendor:publish</code> to publish the default config file, edit caching setting withing the resulting <code>config/fanout.php</code> file as desired.</p>
+
+<h3>
+<a id="example-controller-method-and-its-related-view" class="anchor" href="#example-controller-method-and-its-related-view" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example controller method, and it's related view:</h3>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$fanout</span> <span class="pl-k">=</span> <span class="pl-c1">Fanout</span><span class="pl-k">::</span>start();</span>
+<span class="pl-s1"><span class="pl-smi">$fanout</span><span class="pl-k">-&gt;</span>trigger( <span class="pl-s"><span class="pl-pds">'</span>want-to-brodcast-channel-name<span class="pl-pds">'</span></span>, [</span>
+<span class="pl-s1">    <span class="pl-s"><span class="pl-pds">'</span>data1<span class="pl-pds">'</span></span> <span class="pl-k">=&gt;</span> <span class="pl-s"><span class="pl-pds">'</span>lorem ipsum dolor<span class="pl-pds">'</span></span>,</span>
+<span class="pl-s1">    <span class="pl-c">// ...</span></span>
+<span class="pl-s1">] );</span></pre></div>
+
+<p>DONT FORGET change YOUR-REALM-ID and YOUR-CHANNEL</p>
+
+<p>View:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">@</span><span class="pl-k">extends</span>(<span class="pl-s"><span class="pl-pds">'</span>layouts.default<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">@</span>section(<span class="pl-s"><span class="pl-pds">'</span>content<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1"></span>
+<span class="pl-s1">    <span class="pl-c1">Fanout</span><span class="pl-k">.</span><span class="pl-c1">io</span> <span class="pl-c1">Web</span> <span class="pl-c1">Socket</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">@</span><span class="pl-c1">endsection</span></span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">@</span>section(<span class="pl-s"><span class="pl-pds">'</span>footer<span class="pl-pds">'</span></span>)</span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-c1">script</span> <span class="pl-c1">src</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>http://YOUR-REALM-ID.fanoutcdn.com/bayeux/static/faye-browser-min.js<span class="pl-pds">"</span></span><span class="pl-k">&gt;&lt;</span><span class="pl-k">/</span><span class="pl-c1">script</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-c1">script</span> <span class="pl-c1">type</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">"</span>text/javascript<span class="pl-pds">"</span></span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1">        <span class="pl-k">var</span> <span class="pl-c1">client</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Faye</span><span class="pl-k">.</span>Client(<span class="pl-s"><span class="pl-pds">'</span>http://YOUR-REALM-ID.fanoutcdn.com/bayeux<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1">        <span class="pl-c1">client</span><span class="pl-k">.</span>subscribe(<span class="pl-s"><span class="pl-pds">'</span>/YOUR-CHANNEL<span class="pl-pds">'</span></span>, <span class="pl-k">function</span> (data) {</span>
+<span class="pl-s1">            <span class="pl-c1">console</span><span class="pl-k">.</span><span class="pl-c1">log</span>( <span class="pl-c1">data</span> );</span>
+<span class="pl-s1">        });</span>
+<span class="pl-s1">    <span class="pl-k">&lt;</span><span class="pl-k">/</span><span class="pl-c1">script</span><span class="pl-k">&gt;</span></span>
+<span class="pl-s1"><span class="pl-k">@</span><span class="pl-c1">endsection</span></span></pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/barisbora/fanout">Fanout</a> is maintained by <a href="https://github.com/barisbora">barisbora</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
